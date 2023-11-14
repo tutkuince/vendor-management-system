@@ -50,4 +50,9 @@ public class DataServiceImpl implements IDataService {
     public List<Person> findAll() {
         return dataRepository.findAll();
     }
+
+    @Override
+    public void deleteById(String id) {
+        dataRepository.deleteById(id);
+    }
 }

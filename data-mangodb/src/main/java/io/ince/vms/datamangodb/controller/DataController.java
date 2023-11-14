@@ -96,4 +96,14 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable String id) {
+        try {
+            iDataService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(Constants.DELETE_OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_DELETE_REQUEST);
+        }
+    }
 }

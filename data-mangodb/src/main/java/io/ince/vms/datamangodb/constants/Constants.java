@@ -21,4 +21,15 @@ public class Constants {
                 "message": "Unable to update your request"
             }
             """;
+    public static final String DELETE_OK = """
+            {
+            "acknowledged": true,
+            "deletedCount": 1
+            }
+            """;
+    public static final String BAD_DELETE_REQUEST = """
+            {
+            "message": "Unable to delete request"
+            }
+            """;
 }
