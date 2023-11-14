@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/data")
+@RequestMapping(value = "/data", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DataController {
     private final IDataService iDataService;
 
@@ -20,7 +20,7 @@ public class DataController {
         this.iDataService = iDataService;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     public ResponseEntity<?> postPerson(@RequestBody Person person) {
         try {
             Person savedPerson = iDataService.save(person);
@@ -30,7 +30,7 @@ public class DataController {
         }
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> getPersonById(@PathVariable String id) {
         try {
             Optional<Person> optionalPerson = iDataService.findPersonById(id);
@@ -56,4 +56,20 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.GET_DATA_ERROR);
         }
     }
+
+    @GetMapping("/age")
+    public ResponseEntity<?> getPersonByAgeBetween(@RequestParam Integer minAge, @RequestParam Integer maxAge) {
+        try {
+            List<Person> personList = iDataService.findAllByAgeBetween(minAge, maxAge);
+            if (!personList.isEmpty())
+                return ResponseEntity.status(HttpStatus.OK).body(personList);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_NOT_FOUND);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.GET_DATA_ERROR);
+        }
+    }
+
+
 }

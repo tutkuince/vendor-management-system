@@ -30,4 +30,8 @@ public class DataServiceImpl implements IDataService {
     public List<Person> getPersonByNameStartsWith(String name) {
         return dataRepository.findPersonByNameStartsWith(name);
     }
+    @Override
+    public List<Person> findAllByAgeBetween(Integer minAge, Integer maxAge) {
+        return dataRepository.findAllByAgeBetween(minAge, maxAge);
+    }
 }

@@ -20,6 +20,7 @@ public class Person {
     private String city;
     private String state;
     private String zipCode;
+    private Integer age;
 
     @Indexed(unique = true)
     private String email;
