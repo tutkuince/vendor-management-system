@@ -1,0 +1,14 @@
+#spring:
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27018
+#      database: persons
+#      username: root
+#      password: password
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27018/persons
+      auto-index-creation: true
