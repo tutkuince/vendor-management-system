@@ -16,4 +16,9 @@ public class Constants {
                 "message": "Data not found"
             }
             """;
+    public static final String BAD_PUT_REQUEST = """
+            {
+                "message": "Unable to update your request"
+            }
+            """;
 }

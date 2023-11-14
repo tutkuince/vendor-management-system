@@ -23,7 +23,7 @@ public class DataController {
     @PostMapping()
     public ResponseEntity<?> postPerson(@RequestBody Person person) {
         try {
-            Person savedPerson = iDataService.save(person);
+            Person savedPerson = iDataService.save(null, person);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedPerson);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.DATA_ERROR);
@@ -81,6 +81,19 @@ public class DataController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_NOT_FOUND);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.GET_DATA_ERROR);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateById(@PathVariable String id, @RequestBody Person person) {
+        try {
+            Person updatedPerson = iDataService.save(id, person);
+            if (updatedPerson != null)
+                return ResponseEntity.status(HttpStatus.OK).body(updatedPerson);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_NOT_FOUND);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
         }
     }
 }

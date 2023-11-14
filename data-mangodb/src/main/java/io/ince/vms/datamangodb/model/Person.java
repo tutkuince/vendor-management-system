@@ -1,6 +1,7 @@
 package io.ince.vms.datamangodb.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @ToString
 @Document
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person {
 
