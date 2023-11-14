@@ -3,6 +3,8 @@ package io.ince.vms.datamangodb.service;
 import io.ince.vms.datamangodb.model.Person;
 import io.ince.vms.datamangodb.repository.DataRepository;
 import io.ince.vms.datamangodb.utility.Utility;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,8 +49,9 @@ public class DataServiceImpl implements IDataService {
     }
 
     @Override
-    public List<Person> findAll() {
-        return dataRepository.findAll();
+    public Page<Person> findAll(Integer pageNumber, Integer size) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, size);
+        return dataRepository.findAll(pageRequest);
     }
 
     @Override

@@ -3,6 +3,7 @@ package io.ince.vms.datamangodb.controller;
 import io.ince.vms.datamangodb.constants.Constants;
 import io.ince.vms.datamangodb.model.Person;
 import io.ince.vms.datamangodb.service.IDataService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -72,9 +73,9 @@ public class DataController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll(@RequestParam Integer pageNumber, @RequestParam Integer size) {
         try {
-            List<Person> personList = iDataService.findAll();
+            Page<Person> personList = iDataService.findAll(pageNumber, size);
             if (!personList.isEmpty())
                 return ResponseEntity.status(HttpStatus.OK).body(personList);
             else
