@@ -34,4 +34,9 @@ public class DataServiceImpl implements IDataService {
     public List<Person> findAllByAgeBetween(Integer minAge, Integer maxAge) {
         return dataRepository.findAllByAgeBetween(minAge, maxAge);
     }
+
+    @Override
+    public List<Person> findAll() {
+        return dataRepository.findAll();
+    }
 }
