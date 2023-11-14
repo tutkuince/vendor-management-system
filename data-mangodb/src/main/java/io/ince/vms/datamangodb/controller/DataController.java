@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,6 +39,19 @@ public class DataController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_NOT_FOUND);
             }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.GET_DATA_ERROR);
+        }
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> getPersonByNameStartsWith(@RequestParam String name) {
+        try {
+            List<Person> personList = iDataService.getPersonByNameStartsWith(name);
+            if (!personList.isEmpty())
+                return ResponseEntity.status(HttpStatus.OK).body(personList);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_NOT_FOUND);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Constants.GET_DATA_ERROR);
         }
