@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,8 @@ class DataRepositoryTest {
 
     private Person person;
     private List<Person> personList;
+
+    private Page<Person> personPage;
 
     @MockBean
     private DataRepository mockRepository;
@@ -68,5 +73,17 @@ class DataRepositoryTest {
     void insertPerson() {
         Mockito.when(mockRepository.insert(person)).thenReturn(person);
         assertEquals(mockRepository.insert(person).getCity(),"Izmir");
+    }
+
+    @Test
+    void deletePerson() {
+        mockRepository.deleteById("6553ce8d5d279420039a77d9");
+        Mockito.verify(mockRepository).deleteById("6553ce8d5d279420039a77d9");
+    }
+
+    @Test
+    void findAll() {
+        Mockito.when(mockRepository.findAll()).thenReturn(personList);
+        assertEquals(mockRepository.findAll().get(0).getName(), "Tutku Ince");
     }
 }
