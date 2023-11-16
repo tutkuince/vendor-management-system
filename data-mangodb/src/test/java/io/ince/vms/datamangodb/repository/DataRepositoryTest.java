@@ -46,5 +46,7 @@ class DataRepositoryTest {
 
     @Test
     void findAllByAgeBetween() {
+        Mockito.when(mockRepository.findAllByAgeBetween(30, 35)).thenReturn(personList);
+        assertEquals(mockRepository.findAllByAgeBetween(30, 35).get(0).getAge(), 34);
     }
 }
