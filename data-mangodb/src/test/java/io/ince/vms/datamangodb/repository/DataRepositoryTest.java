@@ -63,4 +63,10 @@ class DataRepositoryTest {
         Mockito.when(mockRepository.save(person)).thenReturn(person);
         assertEquals(mockRepository.save(person).getEmail(),"tutku@mail.com");
     }
+
+    @Test
+    void insertPerson() {
+        Mockito.when(mockRepository.insert(person)).thenReturn(person);
+        assertEquals(mockRepository.insert(person).getCity(),"Izmir");
+    }
 }
