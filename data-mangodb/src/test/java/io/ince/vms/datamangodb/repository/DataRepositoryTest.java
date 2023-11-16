@@ -49,4 +49,12 @@ class DataRepositoryTest {
         Mockito.when(mockRepository.findAllByAgeBetween(30, 35)).thenReturn(personList);
         assertEquals(mockRepository.findAllByAgeBetween(30, 35).get(0).getAge(), 34);
     }
+
+    @Test
+    void findById() {
+        if (mockRepository.findById("6553ce8d5d279420039a77d9").isPresent()) {
+            Mockito.when(mockRepository.findById("6553ce8d5d279420039a77d9").get()).thenReturn(person);
+            assertEquals(mockRepository.findById("6553ce8d5d279420039a77d9").get().getZipCode(),"35590");
+        }
+    }
 }
