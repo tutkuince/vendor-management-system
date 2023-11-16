@@ -57,4 +57,10 @@ class DataRepositoryTest {
             assertEquals(mockRepository.findById("6553ce8d5d279420039a77d9").get().getZipCode(),"35590");
         }
     }
+
+    @Test
+    void updatePerson() {
+        Mockito.when(mockRepository.save(person)).thenReturn(person);
+        assertEquals(mockRepository.save(person).getEmail(),"tutku@mail.com");
+    }
 }
