@@ -106,6 +106,9 @@ class DataControllerTest {
     }
 
     @Test
-    void deleteById() {
+    void deleteById() throws Exception {
+        Mockito.when(mockController.deleteById(person.getId())).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(delete("/data/{id}", person.getId()))
+                .andExpect(status().is2xxSuccessful());
     }
 }
