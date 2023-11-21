@@ -80,7 +80,11 @@ class DataControllerTest {
     }
 
     @Test
-    void getPersonByAgeBetween() {
+    void getPersonByAgeBetween() throws Exception {
+        Mockito.when(mockController.getPersonByAgeBetween(30, 35)).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(get("/data/age?minAge={0}&maxAge={1}", 30, 35)
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
