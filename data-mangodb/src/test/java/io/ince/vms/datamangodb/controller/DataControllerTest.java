@@ -96,7 +96,13 @@ class DataControllerTest {
     }
 
     @Test
-    void updateById() {
+    void updateById() throws Exception {
+        Mockito.when(mockController.updateById(person.getId(), person)).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(put("/data/{id}", person.getId())
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .content(strPerson)
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
