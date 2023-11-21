@@ -88,7 +88,11 @@ class DataControllerTest {
     }
 
     @Test
-    void findAll() {
+    void findAll() throws Exception {
+        Mockito.when(mockController.findAll(0, 4)).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(get("/data/all?pageNumber={0}&size={1}", 0, 4)
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
