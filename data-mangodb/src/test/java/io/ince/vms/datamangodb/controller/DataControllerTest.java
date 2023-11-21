@@ -72,7 +72,11 @@ class DataControllerTest {
     }
 
     @Test
-    void getPersonByNameStartsWith() {
+    void getPersonByNameStartsWith() throws Exception {
+        Mockito.when(mockController.getPersonByNameStartsWith("Tutku")).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(get("/data?name=Tutku")
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
