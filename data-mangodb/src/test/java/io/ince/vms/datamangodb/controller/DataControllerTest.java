@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(DataController.class)
@@ -56,14 +56,19 @@ class DataControllerTest {
     void postPerson() throws Exception {
         Mockito.when(mockController.postPerson(person)).thenReturn(ResponseEntity.status(201).build());
         mockMvc.perform(post("/data")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(strPerson)
-                .accept(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(strPerson)
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
-    void getPersonById() {
+    void getPersonById() throws Exception {
+        Mockito.when(mockController.getPersonById(person.getId())).thenReturn(ResponseEntity.status(200).build());
+        mockMvc.perform(get("/data/{id}", person.getId())
+                        .content(person.getId())
+                        .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
